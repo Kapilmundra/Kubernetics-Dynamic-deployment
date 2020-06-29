@@ -14,19 +14,7 @@ spec:
   selector:
     app: web
 
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: htmlvol
-  labels:
-    app: web
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 2Gi
+
 
 ---
 apiVersion: apps/v1
@@ -49,14 +37,8 @@ spec:
       containers:
       - name: httpd
         image: kapil1305/webserver:v1
-        volumeMounts:
-        - name: web-vol1
-          mountPath: /var/www/html
         ports:
         - containerPort: 80
-      volumes:
-      - name: web-vol1
-        persistentVolumeClaim:
-          claimName: htmlvol      
+     
        
 ---
